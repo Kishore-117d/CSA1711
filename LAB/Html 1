@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My AI Lab Blog</title>
+</head>
+
+<body>
+
+    <h1>Welcome to My AI Blog</h1>
+
+    <h2>About Artificial Intelligence</h2>
+
+    <p>
+        Artificial Intelligence is a branch of computer science
+        that focuses on creating intelligent machines and systems.
+    </p>
+
+    <h2>AI Applications</h2>
+
+    <ul>
+        <li>Machine Learning</li>
+        <li>Natural Language Processing</li>
+        <li>Computer Vision</li>
+        <li>Robotics</li>
+    </ul>
+
+    <h2>Useful Link</h2>
+
+    <!-- Anchor Tag -->
+    <a href="https://www.google.com">
+        Visit Google
+    </a>
+
+    <br><br>
+
+    <a href="https://www.wikipedia.org">
+        Learn More About AI
+    </a>
+
+    <h2>Contact</h2>
+
+    <p>Email: student@example.com</p>
+
+</body>
+</html>
