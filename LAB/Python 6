@@ -1,0 +1,35 @@
+def vacuum_cleaner(room, position):
+
+    print("Initial State:")
+    print(room)
+
+    for i in range(4):
+
+        print("\nCurrent Position:", position)
+        print("Room:", room)
+
+        if room[position] == "Dirty":
+
+            print("Action: Suck")
+
+            room[position] = "Clean"
+
+        else:
+
+            print("Action: Move")
+
+            if position == 0:
+                position = 1
+            else:
+                position = 0
+
+    print("\nFinal State:")
+    print(room)
+
+
+left = input("Enter Left room status (Dirty/Clean): ")
+right = input("Enter Right room status (Dirty/Clean): ")
+
+room = [left, right]
+
+vacuum_cleaner(room, 0)
