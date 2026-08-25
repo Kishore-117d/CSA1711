@@ -1,0 +1,92 @@
+from collections import deque
+
+
+def is_safe(m, c):
+
+    if m < 0 or m > 3:
+        return False
+
+    if c < 0 or c > 3:
+        return False
+
+    # Left side
+    if m != 0 and m < c:
+        return False
+
+    # Right side
+    right_m = 3 - m
+    right_c = 3 - c
+
+    if right_m != 0 and right_m < right_c:
+        return False
+
+    return True
+
+
+queue = deque()
+
+# (Missionaries, Cannibals, Boat)
+start = (3, 3, 1)
+
+goal = (0, 0, 0)
+
+queue.append((start, []))
+
+visited = {start}
+
+moves = [
+    (1, 0),
+    (2, 0),
+    (0, 1),
+    (0, 2),
+    (1, 1)
+]
+
+while queue:
+
+    state, path = queue.popleft()
+
+    if state == goal:
+
+        print("Solution:")
+
+        for s in path + [state]:
+            print(s)
+
+        break
+
+    m, c, boat = state
+
+    for dm, dc in moves:
+
+        if boat == 1:
+
+            new_state = (
+                m - dm,
+                c - dc,
+                0
+            )
+
+        else:
+
+            new_state = (
+                m + dm,
+                c + dc,
+                1
+            )
+
+        if is_safe(
+            new_state[0],
+            new_state[1]
+        ):
+
+            if new_state not in visited:
+
+                visited.add(new_state)
+
+                queue.append(
+                    (
+                        new_state,
+                        path + [state]
+                    )
+                )
