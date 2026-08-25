@@ -1,0 +1,25 @@
+% Bird Flying Program
+
+bird(sparrow).
+bird(eagle).
+bird(parrot).
+bird(penguin).
+bird(ostrich).
+
+can_fly(sparrow).
+can_fly(eagle).
+can_fly(parrot).
+
+cannot_fly(X) :-
+    bird(X),
+    \+ can_fly(X).
+
+check_bird(Bird) :-
+    can_fly(Bird),
+    write(Bird),
+    write(' can fly.').
+
+check_bird(Bird) :-
+    cannot_fly(Bird),
+    write(Bird),
+    write(' cannot fly.').
