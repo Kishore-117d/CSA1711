@@ -1,0 +1,53 @@
+# Map Coloring using Constraint Satisfaction Problem
+
+colors = ["Red", "Green", "Blue"]
+
+graph = {
+    "A": ["B", "C"],
+    "B": ["A", "C", "D"],
+    "C": ["A", "B", "D"],
+    "D": ["B", "C"]
+}
+
+assignment = {}
+
+
+def is_safe(region, color):
+    for neighbour in graph[region]:
+        if neighbour in assignment:
+            if assignment[neighbour] == color:
+                return False
+    return True
+
+
+def solve():
+    if len(assignment) == len(graph):
+        return True
+
+    region = next(
+        r for r in graph
+        if r not in assignment
+    )
+
+    for color in colors:
+
+        if is_safe(region, color):
+
+            assignment[region] = color
+
+            if solve():
+                return True
+
+            del assignment[region]
+
+    return False
+
+
+if solve():
+    print("Map Coloring Solution:")
+
+    for region, color in assignment.items():
+        print(region, "->", color)
+
+else:
+    print("No solution found")
