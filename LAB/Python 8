@@ -1,0 +1,39 @@
+graph = {}
+
+n = int(input("Enter number of edges: "))
+
+for i in range(n):
+
+    u, v = input("Enter edge: ").split()
+
+    if u not in graph:
+        graph[u] = []
+
+    if v not in graph:
+        graph[v] = []
+
+    graph[u].append(v)
+    graph[v].append(u)
+
+
+visited = set()
+
+
+def dfs(node):
+
+    visited.add(node)
+
+    print(node, end=" ")
+
+    for neighbour in graph.get(node, []):
+
+        if neighbour not in visited:
+
+            dfs(neighbour)
+
+
+start = input("Enter starting node: ")
+
+print("DFS Traversal:")
+
+dfs(start)
