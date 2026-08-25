@@ -1,0 +1,43 @@
+# Minimax Algorithm
+
+def minimax(depth, maximizing, values):
+
+    # Leaf node
+    if depth == 3:
+        return values.pop(0)
+
+    left = minimax(
+        depth + 1,
+        not maximizing,
+        values
+    )
+
+    right = minimax(
+        depth + 1,
+        not maximizing,
+        values
+    )
+
+    if maximizing:
+        return max(left, right)
+
+    else:
+        return min(left, right)
+
+
+values = list(
+    map(
+        int,
+        input(
+            "Enter 8 leaf values: "
+        ).split()
+    )
+)
+
+result = minimax(
+    0,
+    True,
+    values
+)
+
+print("Best value:", result)
