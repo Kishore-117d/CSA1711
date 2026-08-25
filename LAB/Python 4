@@ -1,0 +1,51 @@
+from itertools import permutations
+
+
+def solve():
+
+    word1 = "SEND"
+    word2 = "MORE"
+    result = "MONEY"
+
+    letters = set(
+        word1 + word2 + result
+    )
+
+    letters = list(letters)
+
+    for values in permutations(range(10), len(letters)):
+
+        digit = dict(zip(letters, values))
+
+        # First letters cannot be zero
+        if digit["S"] == 0 or digit["M"] == 0:
+            continue
+
+        def value(word):
+
+            number = 0
+
+            for ch in word:
+                number = number * 10 + digit[ch]
+
+            return number
+
+        num1 = value(word1)
+        num2 = value(word2)
+        num3 = value(result)
+
+        if num1 + num2 == num3:
+
+            print("Solution:")
+            print(digit)
+
+            print(num1)
+            print("+", num2)
+            print("=", num3)
+
+            return
+
+    print("No solution found")
+
+
+solve()
