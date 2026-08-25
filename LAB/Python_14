@@ -1,0 +1,99 @@
+# Alpha-Beta Pruning
+
+def alpha_beta(
+    depth,
+    node,
+    maximizing,
+    alpha,
+    beta,
+    values
+):
+
+    # Leaf node
+    if depth == 3:
+        return values[node]
+
+    if maximizing:
+
+        best = float("-inf")
+
+        left = alpha_beta(
+            depth + 1,
+            node * 2 + 1,
+            False,
+            alpha,
+            beta,
+            values
+        )
+
+        best = max(best, left)
+
+        alpha = max(alpha, best)
+
+        if alpha < beta:
+
+            right = alpha_beta(
+                depth + 1,
+                node * 2 + 2,
+                False,
+                alpha,
+                beta,
+                values
+            )
+
+            best = max(best, right)
+
+        return best
+
+    else:
+
+        best = float("inf")
+
+        left = alpha_beta(
+            depth + 1,
+            node * 2 + 1,
+            True,
+            alpha,
+            beta,
+            values
+        )
+
+        best = min(best, left)
+
+        beta = min(beta, best)
+
+        if alpha < beta:
+
+            right = alpha_beta(
+                depth + 1,
+                node * 2 + 2,
+                True,
+                alpha,
+                beta,
+                values
+            )
+
+            best = min(best, right)
+
+        return best
+
+
+values = list(
+    map(
+        int,
+        input(
+            "Enter 8 leaf values: "
+        ).split()
+    )
+)
+
+result = alpha_beta(
+    0,
+    0,
+    True,
+    float("-inf"),
+    float("inf"),
+    values
+)
+
+print("Optimal value:", result)
