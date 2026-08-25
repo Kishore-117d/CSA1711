@@ -1,0 +1,68 @@
+from collections import deque
+
+jug1, jug2, target = map(
+    int,
+    input("Enter Jug1 Jug2 Target: ").split()
+)
+
+queue = deque()
+
+queue.append(((0, 0), []))
+
+visited = set()
+
+visited.add((0, 0))
+
+while queue:
+
+    (a, b), path = queue.popleft()
+
+    if a == target or b == target:
+
+        print("\nSolution:")
+
+        for state in path + [(a, b)]:
+            print(state)
+
+        break
+
+    next_states = [
+
+        # Fill Jug 1
+        (jug1, b),
+
+        # Fill Jug 2
+        (a, jug2),
+
+        # Empty Jug 1
+        (0, b),
+
+        # Empty Jug 2
+        (a, 0),
+
+        # Pour Jug 1 -> Jug 2
+        (
+            max(0, a - (jug2 - b)),
+            min(jug2, a + b)
+        ),
+
+        # Pour Jug 2 -> Jug 1
+        (
+            min(jug1, a + b),
+            max(0, b - (jug1 - a))
+        )
+    ]
+
+    for state in next_states:
+
+        if state not in visited:
+
+            visited.add(state)
+
+            queue.append(
+                (state, path + [(a, b)])
+            )
+
+else:
+
+    print("No solution")
