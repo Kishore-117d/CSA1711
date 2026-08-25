@@ -1,0 +1,90 @@
+from heapq import heappush, heappop
+
+
+graph = {}
+
+n = int(input("Enter number of edges: "))
+
+for i in range(n):
+
+    u, v, cost = input(
+        "Enter source destination cost: "
+    ).split()
+
+    cost = int(cost)
+
+    if u not in graph:
+        graph[u] = []
+
+    graph[u].append((v, cost))
+
+
+h = {}
+
+n = int(input("Enter number of heuristic values: "))
+
+for i in range(n):
+
+    node, value = input(
+        "Enter node heuristic: "
+    ).split()
+
+    h[node] = int(value)
+
+
+start, goal = input(
+    "Enter start and goal: "
+).split()
+
+
+priority_queue = []
+
+heappush(
+    priority_queue,
+    (h[start], 0, start, [start])
+)
+
+visited = {}
+
+
+while priority_queue:
+
+    f, g, node, path = heappop(
+        priority_queue
+    )
+
+    if node == goal:
+
+        print("Path:", path)
+
+        print("Cost:", g)
+
+        break
+
+    if node in visited and visited[node] <= g:
+        continue
+
+    visited[node] = g
+
+    for neighbour, cost in graph.get(node, []):
+
+        new_g = g + cost
+
+        new_f = new_g + h.get(
+            neighbour,
+            0
+        )
+
+        heappush(
+            priority_queue,
+            (
+                new_f,
+                new_g,
+                neighbour,
+                path + [neighbour]
+            )
+        )
+
+else:
+
+    print("No path found")
