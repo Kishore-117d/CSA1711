@@ -1,0 +1,46 @@
+# Decision Tree Classification
+
+from sklearn.tree import DecisionTreeClassifier
+
+
+X = [
+    [1, 2],
+    [2, 3],
+    [3, 3],
+    [8, 7],
+    [9, 8],
+    [8, 9]
+]
+
+y = [
+    0,
+    0,
+    0,
+    1,
+    1,
+    1
+]
+
+
+model = DecisionTreeClassifier(
+    random_state=0
+)
+
+model.fit(X, y)
+
+
+x = list(
+    map(
+        float,
+        input(
+            "Enter two features: "
+        ).split()
+    )
+)
+
+prediction = model.predict([x])
+
+print(
+    "Predicted Class:",
+    prediction[0]
+)
