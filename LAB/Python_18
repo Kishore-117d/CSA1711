@@ -1,0 +1,46 @@
+# K-Nearest Neighbors Classification
+
+from sklearn.neighbors import KNeighborsClassifier
+
+
+X = [
+    [1, 1],
+    [1, 2],
+    [2, 1],
+    [8, 8],
+    [9, 8],
+    [8, 9]
+]
+
+y = [
+    "A",
+    "A",
+    "A",
+    "B",
+    "B",
+    "B"
+]
+
+
+model = KNeighborsClassifier(
+    n_neighbors=3
+)
+
+model.fit(X, y)
+
+
+x = list(
+    map(
+        float,
+        input(
+            "Enter two features: "
+        ).split()
+    )
+)
+
+prediction = model.predict([x])
+
+print(
+    "Predicted Class:",
+    prediction[0]
+)
